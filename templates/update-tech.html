@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> MedDB - Update Tech </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <nav>
+          <a class="nav-link" href="/">Home Page</a>|
+          <a class="nav-link" href="/medications">Medication Inventory</a> |
+          <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+          <a class="nav-link" href="/orders">Purchase Orders</a> |
+          <a class="nav-link" href="/suppliers">Suppliers</a> |
+          <a class="nav-link" href="/patients">Patients</a> |
+          <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+        </nav>
+    </div>
+
+    {% block content %}
+    <div>
+    {% for message in get_flashed_messages() %}
+    <div>
+       <p class="error_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
+
+    <sec>
+        <h2 class="page-title">Update Selected Technician</h2>
+    </sec>
+    <section>
+    <form action="/update-tech" method="POST">
+        <fieldset>
+         <label>First Name</label>
+        <input type="hidden" name="employee_id" value="{{tech['employee_id']}}" required>
+         <label>Last Name</label>
+        <section>
+            <input class="input-attribute" type="text" name="first_name" value="{{tech['first_name']}}" required>
+        </section>
+        <section>
+            <input class="input-attribute" type="text" name="last_name" value="{{tech['last_name']}}" required>
+        </section>
+
+        <br>
+       <input class="update-button" type="submit" value="Submit">
+         <button class="update-button"><a href="/techs" role="button">Cancel</a> </button>
+        </fieldset>
+    </form>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MedDB - Pharm Techs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+    <nav>
+        <a class="nav-link" href="/">Home Page</a>|
+        <a class="nav-link" href="/medications">Medication Inventory</a> |
+        <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+        <a class="nav-link" href="/orders">Purchase Orders</a> |
+        <a class="nav-link" href="/suppliers">Suppliers</a> |
+        <a class="nav-link" href="/patients">Patients</a> |
+        <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+    </nav>
+    </div>
+
+    {% block content %}
+    <div>
+    {% for message in get_flashed_messages() %}
+    <div>
+       <p class="error_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
+
+    <div>
+        <h2 class="page-title">Pharmacy Technicians</h2>
+    </div>
+
+    <div>
+        <table id="techs">
+            <caption>
+                Techs
+            </caption>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for tech in tech_info %}
+                <tr>
+                    <td>{{tech['employee_id']}}</td>
+                    <td>{{tech['first_name']}}</td>
+                    <td>{{tech['last_name']}}</td>
+                    <td>
+                        <form action="/update-tech" method="GET">
+                            <button class="alt-button" type="submit" name="employee_id" value="{{ tech['employee_id'] }}">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/techs" method="POST">
+                            <button class="alt-button" type="submit" name="delete" value="{{ tech['employee_id'] }}">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+
+    <section>
+        <div>
+            <h2 class="page-title">Add Pharmacy Technician</h2>
+        </div>
+        <form action="/techs" method="post">
+            <fieldset>
+            <input class="input-attribute" type="text" placeholder="First Name" name="first_name" required/>
+            <input class="input-attribute" type="text" placeholder="Last Name" name="last_name" required/>
+            <div class="button-container">
+                <input class="alt-button" type="submit" id="add_tech" value="Add Pharm Tech">
+            </div>
+            </fieldset>
+            </form>
+    </section>
+<br>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> MedDB - Update Supplier </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <nav>
+          <a class="nav-link" href="/">Home Page</a>|
+          <a class="nav-link" href="/medications">Medication Inventory</a> |
+          <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+          <a class="nav-link" href="/orders">Purchase Orders</a> |
+          <a class="nav-link" href="/suppliers">Suppliers</a> |
+          <a class="nav-link" href="/patients">Patients</a> |
+          <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+        </nav>
+    </div>
+
+    {% block content %}
+    <div>
+    {% for message in get_flashed_messages() %}
+    <div>
+       <p class="error_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
+
+    <div>
+        <h2 class="page-title">Update Supplier</h2>
+    </div>
+    <div>
+    <form action="/update-supplier" method="POST">
+        <fieldset>
+        <input type="hidden" name="supplier_id" value="{{supply['supplier_id']}}">
+        <label>Supplier Name</label>
+        <section>
+            <input class="input-attribute" type="text" name="name" value="{{supply['name']}}" required>
+        </section>
+        <label>Zip</label>
+        <section>
+            <input class="input-attribute" type="text" pattern="[0-9]{5}" minlength="5" maxlength="5" name="zip_code" value="{{supply['zip_code']}}" required>
+        </section>
+         <label>Phone</label>
+        <section>
+            <input class="input-attribute" type="text" pattern="[0-9]{10}" name="phone" minlength="10" maxlength="10" value="{{supply['phone']}}" required>
+        </section>
+
+            <br>
+       <input class="update-button" type="submit" value="Submit">
+        <button class="update-button"><a href="/suppliers" role="button">Cancel</a></button>
+        </fieldset>
+    </form>
+    </div>
+
+</body>
+
+</html>

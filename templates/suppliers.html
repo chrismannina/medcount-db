@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> MedDB - Suppliers </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+    <nav>
+        <a class="nav-link" href="/">Home Page</a>|
+        <a class="nav-link" href="/medications">Medication Inventory</a> |
+        <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+        <a class="nav-link" href="/orders">Purchase Orders</a> |
+        <a class="nav-link" href="/suppliers">Suppliers</a> |
+        <a class="nav-link" href="/patients">Patients</a> |
+        <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+    </nav>
+    </div>
+
+    {% block content %}
+    <div>
+    {% for message in get_flashed_messages() %}
+    <div>
+       <p class="error_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
+
+        <div>
+            <h2 class="page-title">Suppliers</h2>
+        </div>
+
+        <div>
+            <table id="suppliers">
+                <caption>
+                    Suppliers
+                </caption>
+                <thead>
+                    <tr>
+                        <th>Supplier ID</th>
+                        <th>Name</th>
+                        <th>Zip Code</th>
+                        <th>Phone</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for supply in supplier_info  %}
+                    <tr>
+                        <td>{{supply['supplier_id']}}</td>
+                        <td>{{supply['name']}}</td>
+                        <td>{{supply['zip_code']}}</td>
+                        <td>{{supply['phone']}}</td>
+                        <td>
+                            <form action="/update-supplier" method="GET">
+                                <button id="alt-button" type="submit" name="supplier_id" value="{{ supply['supplier_id'] }}">Edit</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/suppliers" method="POST">
+                                <button id="alt-button" type="submit" name="delete" value="{{ supply['supplier_id'] }}">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <section>
+            <div>
+                <h2 class="page-title">Add Supplier</h2>
+            </div>
+            <form action="/suppliers" method="post">
+                <fieldset>
+                <input class="input-attribute" type="text" placeholder="Enter supplier name" required name="name" required/>
+                <input class="input-attribute" type="text" pattern="[0-9]{5}" placeholder="5 digit zip" maxlength="5" minlength="5" name="zip_code"required/>
+                <input class="input-attribute" type="text" pattern="[0-9]{10}" placeholder="Phone-no dashes" name="phone" minlength="10" maxlength="10"required/>
+            <div class="button-container">
+                <input class="alt-button" type="submit" id="add_supplier" value="Add Supplier">
+            </div>
+            </fieldset>
+            </form>
+        </section>
+<br>
+</body>
+</html>

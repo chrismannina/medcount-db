@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> MedDB - Update Patient </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+    <div id="website-header">
+        <h1>MedCount DB</h1>
+        <nav>
+          <a class="nav-link" href="/">Home Page</a>|
+          <a class="nav-link" href="/medications">Medication Inventory</a> |
+          <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+          <a class="nav-link" href="/orders">Purchase Orders</a> |
+          <a class="nav-link" href="/suppliers">Suppliers</a> |
+          <a class="nav-link" href="/patients">Patients</a> |
+          <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+        </nav>
+    </div>
+
+    {% block content %}
+    <div>
+    {% for message in get_flashed_messages() %}
+    <div>
+       <p class="error_message">{{ message }}</p>
+    </div>
+    {% endfor %}
+
+    {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
+
+    <div>
+        <h2 class="page-title">Update Selected Patient</h2>
+    </div>
+    <section>
+    <form action="/update-patient" method="POST">
+        <fieldset>
+        <input type="hidden" name="patient_id" value="{{patient['patient_id']}}">
+            <label>First Name</label>
+            <section>
+                <input class="input-attribute" type="text" name="first_name" value="{{patient['first_name']}}" required>
+            </section>
+
+            <label>Last Name</label>
+            <section>
+                <input class="input-attribute" type="text" name="last_name" value="{{patient['last_name']}}" required>
+            </section>
+
+            <label>Phone</label>
+            <section>
+                <input class="input-attribute" type="number" name="phone" minlength="10" maxlength="10" value="{{patient['phone']}}" required>
+            </section>
+
+            <label>Street Number</label>
+            <section>
+                <input class="input-attribute" type="number" name="street_number" value="{{patient['street_number']}}" required>
+            </section>
+
+            <label>Street name</label>
+            <section>
+                <input class="input-attribute" type="text" name="street_name" value="{{patient['street_name']}}" required>
+            </section>
+
+            <label>Zip Code</label>
+            <section>
+                <input class="input-attribute" type="text" name="zip_code" pattern="[0-9]{5}" minlength="5" maxlength="5" value="{{patient['zip_code']}}" required>
+            </section>
+
+            <br>
+
+       <input class="update-button" type="submit" value="Submit">
+        <button class="update-button"><a class="cancelToHome" href="/patients" role="button">Cancel</a></button>
+        </fieldset>
+    </form>
+    </section>
+
+</body>
+
+</html>

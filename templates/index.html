@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> MedDB - Home </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+
+  <div id="website-header">
+    <h1>MedCount DB</h1>
+    <nav>
+      <a class="nav-link" href="/">Home Page</a>|
+      <a class="nav-link" href="/medications">Medication Inventory</a> |
+      <a class="nav-link" href="/prescriptions">Prescriptions</a> |
+      <a class="nav-link" href="/orders">Purchase Orders</a> |
+      <a class="nav-link" href="/suppliers">Suppliers</a> |
+      <a class="nav-link" href="/patients">Patients</a> |
+      <a class="nav-link" href="/techs">Pharmacy Technicians</a>
+    </nav>
+  </div>
+
+  <div>
+    <h2 id="website-subtitle">Beaver Drugs</h2>
+    <h3 class="page-title">
+      Pharmacy Inventory Management
+    </h3>
+    <p>
+      Welcome to Beaver Drugs' Medication Inventory Management System. Please use the navigation bar above to view,
+      modify, and add inventory and data.
+    </p>
+    <section>
+      <img class="logo" src="static/media/pill_bottle.jpg" alt="pill bottle" />
+    </section>
+    <cite><a id="citation" href="https://www.flickr.com/photos/charlesonflickr/3926259585">Image Citation</a></cite>
+  </div>
+</body>
+
+</html>
